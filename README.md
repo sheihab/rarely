@@ -1,21 +1,18 @@
-# Rarely: the daily word game where rare answers win
+# Rarely & Squarely: free daily word games
 
 **▶ Play: [sheihab.github.io/rarely](https://sheihab.github.io/rarely/)**
 
-Every day there are 7 word prompts, the same for everyone ("Starts with QU", "Contains Z", "5 letters, starts with R"…). Type one real English word for each. Common words barely score; rare words score up to 100. A perfect day is 700.
+- **Rarely**: 7 "Name a…" prompts a day, 25 seconds each. Obvious answers score 10; rare answers score up to 100. Unlimited mode never ends.
+- **[Squarely](https://sheihab.github.io/rarely/squarely.html)**: guess the hidden 5-letter word in 6 tries. New word daily, plus unlimited.
 
-- 🗓️ New puzzle every day at midnight · 🔥 streaks and stats · 📤 share your score grid
-- ♾️ Unlimited mode · 🗂️ Archive of every past puzzle
-- 📚 [319 word lists](https://sheihab.github.io/rarely/word-lists.html) (words that start with, end with, contain…) · 💡 [Daily answers](https://sheihab.github.io/rarely/answers.html)
-
-No sign-up, works on phones and laptops, installable as an app.
+No sign-up. Works on phones and laptops, installable as an app.
+[Lists](https://sheihab.github.io/rarely/lists.html) · [Word lists](https://sheihab.github.io/rarely/word-lists.html) · [Answers](https://sheihab.github.io/rarely/answers.html)
 
 ---
-### How it runs (developer notes)
-- `index.html`: the whole game. `data/words.json` holds ~57k words with rarity points; `data/puzzles.json` holds the prompts and 800 days of daily puzzles.
-- `tools/build_data.py` rebuilds the word list and puzzles (word frequencies from the open-source [wordfreq](https://github.com/rspeer/wordfreq) project).
-- `tools/build_pages.py` builds the word-list pages, how-to-play and privacy.
-- `tools/build_daily.py` builds the daily answers page, sitemap and robots.txt. **It runs automatically every night** via `.github/workflows/daily.yml`, which also pings Bing/IndexNow.
-- **Ads:** paste your AdSense publisher ID into `CONFIG.ADSENSE_CLIENT` in `index.html` (ad slots stay hidden until then).
+### Developer notes
+- `index.html` (Rarely), `squarely.html`, shared `app.css` + `common.js`.
+- `tools/categories.py`: the "Name a…" answer bank. Edit, then run `python3 tools/build_v2.py` to rebuild `data/rarely.json` + `data/squarely.json`.
+- `tools/build_pages.py` (word lists), `tools/build_lists.py` (category lists, how-to-play), `tools/build_daily.py` (daily answers, sitemap). **build_daily runs automatically every night** (`.github/workflows/daily.yml`) and pings Bing via IndexNow.
+- **Ads:** paste your AdSense IDs into `CONFIG` at the top of `common.js`. Ad slots stay hidden until then.
 
 Built by Shehab Fadalalla.
