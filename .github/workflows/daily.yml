@@ -1,0 +1,38 @@
+name: Daily puzzle pages
+# Just after midnight Sydney (AEDT, UTC+11): build today's answers page, update the sitemap, and ping search engines.
+on:
+  schedule:
+    - cron: "10 13 * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  pages: write
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 tools/build_daily.py
+      - id: commit
+        name: Commit new pages
+        run: |
+          git config user.name "rarely-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A answers answers.html sitemap.xml robots.txt
+          if git diff --cached --quiet; then echo "changed=no" >> $GITHUB_OUTPUT; else git commit -m "Daily answers page" && git push && echo "changed=yes" >> $GITHUB_OUTPUT; fi
+      - name: Republish the site
+        if: steps.commit.outputs.changed == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST repos/${{ github.repository }}/pages/builds || true
+      - name: Tell Bing & other search engines (IndexNow)
+        if: steps.commit.outputs.changed == 'yes'
+        run: |
+          sleep 60
+          KEY=$(cat tools/indexnow_key.txt)
+          URLS=$(python3 -c "import json;print(json.dumps(json.load(open('tools/.new_urls.json'))))")
+          curl -s -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json" \
+            -d "{\"host\":\"sheihab.github.io\",\"key\":\"$KEY\",\"keyLocation\":\"https://sheihab.github.io/rarely/$KEY.txt\",\"urlList\":$URLS}" -w "IndexNow HTTP %{http_code}\n" || true
