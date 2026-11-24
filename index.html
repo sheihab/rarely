@@ -3,249 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Rarely: Daily Trivia Game Where Rare Answers Win</title>
-<meta name="description" content="Free daily trivia game. 7 'Name a…' prompts, 25 seconds each. Obvious answers barely score; rare answers win. Plus unlimited mode and Squarely, a 5-letter word game.">
+<title>Free Daily Word Games: Rarely, Squarely & Quickly</title>
+<meta name="description" content="Three free daily word games. Name rare answers in Rarely, guess the 5-letter word in Squarely, unscramble words fast in Quickly. New puzzles daily, plus unlimited play.">
 <link rel="canonical" href="https://sheihab.github.io/rarely/">
 <meta name="theme-color" content="#14121F">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
-<meta property="og:title" content="Rarely: the daily game where rare answers win">
-<meta property="og:description" content="7 prompts. 25 seconds each. Obvious answers barely count.">
-<meta property="og:url" content="https://sheihab.github.io/rarely/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://sheihab.github.io/rarely/og-image.png">
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:title" content="Free Daily Word Games: Rarely, Squarely & Quickly"><meta property="og:description" content="Three free daily word games. Name rare answers in Rarely, guess the 5-letter word in Squarely, unscramble words fast in Quickly. New puzzles daily, plus unlimited play.">
+<meta property="og:url" content="https://sheihab.github.io/rarely/"><meta property="og:type" content="website">
+<meta property="og:image" content="https://sheihab.github.io/rarely/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<!--VERIFY-->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Rarely","url":"https://sheihab.github.io/rarely/","applicationCategory":"GameApplication","genre":"Trivia","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"description":"A free daily trivia game where rare answers score the most points."}
-</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Rarely games", "url": "https://sheihab.github.io/rarely/", "description": "Free daily word games: Rarely, Squarely and Quickly."}</script>
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<header>
-  <div class="bar">
-    <button class="icon-btn" id="helpBtn" aria-label="How to play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.3M12 17h.01"/></svg></button>
-    <nav class="games"><a href="./" class="on">Rarely</a><a href="squarely.html">Squarely</a></nav>
-    <button class="icon-btn" id="statsBtn" aria-label="Stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V11M12 20V4M19 20v-6"/></svg></button>
-  </div>
-</header>
-
+<header><div class="bar">
+<a class="icon-btn" href="./" aria-label="All games"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg></a>
+<nav class="games"><a href="rarely.html">Rarely</a><a href="squarely.html">Squarely</a><a href="quickly.html">Quickly</a></nav><span style="width:44px"></span></div></header>
 <main class="wrap">
-  <div class="mode"><button class="on" id="mDaily">Daily</button><button id="mUnl">Unlimited</button></div>
-  <div id="game"><div class="loading">Loading…</div></div>
-  <div class="ad-slot" data-slot="game"></div>
+<div class="hub-title"><h1>Daily word games</h1><p>New puzzles every day. Unlimited anytime.</p></div>
+<div class="hub">
+<a class="gcard" href="rarely.html"><div class="ic" style="background:var(--legend)"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z" fill="#14121F"/></svg></div><div><b>Rarely</b><span>Name something rare · 25s per prompt</span></div><span class="arrow">›</span></a>
+<a class="gcard" href="squarely.html"><div class="ic" style="background:var(--sq-hit)"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><rect x="2" y="2" width="9" height="9" rx="2"/><rect x="13" y="2" width="9" height="9" rx="2" opacity=".55"/><rect x="2" y="13" width="9" height="9" rx="2" opacity=".55"/><rect x="13" y="13" width="9" height="9" rx="2"/></svg></div><div><b>Squarely</b><span>Guess the 5-letter word · 6 tries</span></div><span class="arrow">›</span></a>
+<a class="gcard" href="quickly.html"><div class="ic" style="background:var(--epic)"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="#fff"/></svg></div><div><b>Quickly</b><span>Unscramble words · 60 seconds</span></div><span class="arrow">›</span></a>
+</div>
+<div class="ad-slot" data-slot="hub"></div>
 </main>
-
-<footer><a href="how-to-play.html">How to play</a> · <a href="answers.html">Answers</a> · <a href="lists.html">Lists</a> · <a href="word-lists.html">Word lists</a> · <a href="privacy.html">Privacy</a></footer>
-
+<footer><a href="./">All games</a> · <a href="how-to-play.html">How to play</a> · <a href="answers.html">Answers</a> · <a href="lists.html">Lists</a> · <a href="word-lists.html">Word lists</a> · <a href="privacy.html">Privacy</a></footer>
 <div class="modal-bg" id="modal" role="dialog" aria-modal="true"><div class="modal" id="modalBody"></div></div>
 <div class="toast" id="toast"></div>
-
 <script src="common.js"></script>
-<script>
-{
-const SECS = 25;
-const TIERS = [
-  {p:100, name:"Legendary", c:"var(--legend)", e:"🟨"},
-  {p:85,  name:"Epic",      c:"var(--epic)",   e:"🟪"},
-  {p:60,  name:"Rare",      c:"var(--rare)",   e:"🟦"},
-  {p:30,  name:"Uncommon",  c:"var(--uncommon)", e:"🟩"},
-  {p:10,  name:"Common",    c:"var(--common)", e:"⬜"},
-  {p:0,   name:"Missed",    c:"var(--line)",   e:"⬛"}
-];
-const RANKS = [[560,"Legend"],[460,"Deep thinker"],[370,"Rarity hunter"],[280,"Sharp"],[190,"Explorer"],[100,"Warming up"],[0,"Casual"]];
-const tierOf = p => TIERS.find(t => p >= t.p);
-const rankOf = s => RANKS.find(r => s >= r[0])[1];
-const { $, store, openModal, X, dayIndex, setupAds, countdown } = Common;
-let R, W, state, timer = null;
-
-// ---------- answer checking
-const norm = s => s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/&/g, " and ").replace(/'/g, "").replace(/-/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim().replace(/^the /, "");
-function lev(a, b){
-  if (Math.abs(a.length - b.length) > 2) return 9;
-  const d = Array.from({length: a.length + 1}, (_, i) => [i]);
-  for (let j = 1; j <= b.length; j++) d[0][j] = j;
-  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
-    d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
-  return d[a.length][b.length];
-}
-const wordPts = p => p >= 85 ? 100 : p >= 60 ? 85 : p >= 35 ? 60 : p >= 15 ? 30 : 10;
-function fitsRule(r, w){
-  const a = r.arg, k = r.kind, v = "aeiou";
-  if (k === "start") return w.startsWith(a);
-  if (k === "end") return w.endsWith(a) && w !== a;
-  if (k === "has") return w.includes(a);
-  if (k === "startend") return w[0] === a[0] && w[w.length-1] === a[1];
-  const f = {
-    "2double": () => { const s = new Set(); for (let i = 0; i < w.length-1; i++) if (w[i] === w[i+1]) s.add(w[i]); return s.size >= 2; },
-    novowel: () => !/[aeiou]/.test(w), allvowels: () => [...v].every(c => w.includes(c)), threevowelsrow: () => /[aeiou]{3}/.test(w),
-    "4consonants": () => /[^aeiouy]{4}/.test(w), onevowel7: () => w.length >= 7 && new Set(w.match(/[aeiou]/g) || []).size === 1,
-    zandq: () => w.includes("z") && w.includes("e") && !w.includes("a"), kx: () => w.includes("k") && w.endsWith("y"),
-    doubleo_end: () => w.length > 3 && w[w.length-1] === w[w.length-2], samestartend: () => w.length >= 5 && w[0] === w[w.length-1],
-    alternating: () => w.length >= 6 && [...w].slice(0, -1).every((c, i) => v.includes(c) !== v.includes(w[i+1]))
-  }[a];
-  return f ? f() : false;
-}
-function fromLetters(base, w){
-  const c = {}; for (const ch of base) c[ch] = (c[ch] || 0) + 1;
-  for (const ch of w){ if (!c[ch]) return false; c[ch]--; }
-  return true;
-}
-function answers(pr){   // [[answer, points]] rarest first
-  if (pr._all) return pr._all;
-  const out = [];
-  if (pr.type === "cat"){ for (const [a, p] of Object.entries(R.cats[pr.cat].a)) if (!pr.start || a[0] === pr.start) out.push([a, p]); }
-  else if (pr.type === "word"){ for (const w in W) if (fitsRule(pr.rule, w)) out.push([w, wordPts(W[w])]); }
-  else { for (const w in W) if (w.length >= 4 && w !== pr.base && fromLetters(pr.base, w)) out.push([w, wordPts(W[w])]); }
-  out.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
-  return (pr._all = out);
-}
-function check(pr, raw){
-  const s = norm(raw);
-  if (s.length < 2) return {err: "Type an answer"};
-  if (pr.type === "cat"){
-    const map = R.cats[pr.cat].a, ok = a => !pr.start || a[0] === pr.start;
-    const tries = [s, s.replace(/ies$/, "y"), s.replace(/es$/, ""), s.replace(/s$/, ""), s + "s"];
-    for (const t of tries) if (map[t] !== undefined && ok(t)) return {a: t, p: map[t]};
-    if (s.length >= 5){
-      let best = null, bd = 9;
-      for (const a of Object.keys(map)) if (ok(a)){ const d = lev(s, a); if (d < bd){ bd = d; best = a; } }
-      if (best && bd <= (s.length >= 9 ? 2 : 1)) return {a: best, p: map[best]};
-    }
-    if (pr.start && s[0] !== pr.start) return {err: `Must start with ${pr.start.toUpperCase()}`};
-    return {err: "Not on our list"};
-  }
-  const w = s.replace(/ /g, "");
-  if (pr.type === "word"){
-    if (!fitsRule(pr.rule, w)) return {err: "Doesn't fit"};
-    if (!(w in W)) return {err: "Not in our word list"};
-    return {a: w, p: wordPts(W[w])};
-  }
-  if (w.length < 4) return {err: "4+ letters"};
-  if (!fromLetters(pr.base, w)) return {err: `Only letters in ${pr.base.toUpperCase()}`};
-  if (w === pr.base) return {err: "Not the word itself"};
-  if (!(w in W)) return {err: "Not in our word list"};
-  return {a: w, p: wordPts(W[w])};
-}
-
-// ---------- state
-const rand = () => Math.floor(Math.random() * R.prompts.length);
-function dailyState(d){ return {mode: "daily", day: d, list: R.days[d], cur: 0, ans: [], done: false}; }
-function unlState(){ return {mode: "unl", list: [rand()], cur: 0, ans: [], total: 0}; }
-function save(){ const s = Object.assign({}, state); store.set(state.mode === "daily" ? "r:day:" + state.day : "r:unl", s); }
-function load(mode){
-  stopTimer();
-  if (mode === "daily"){ const d = dayIndex(R.start, R.days.length); const s = store.get("r:day:" + d, null); state = s && s.list ? s : dailyState(d); }
-  else { state = store.get("r:unl", null) || unlState(); if (state.list.length > 60){ state.list = state.list.slice(-1); state.ans = []; state.cur = 0; } }
-  $("mDaily").classList.toggle("on", mode === "daily"); $("mUnl").classList.toggle("on", mode !== "daily");
-  render();
-}
-const total = () => state.ans.reduce((a, x) => a + (x ? x.p : 0), 0);
-
-function render(){
-  if (state.mode === "daily" && state.done) return results();
-  if (state.mode === "unl" && state.ans.length > state.cur){ state.list.push(rand()); state.cur = state.ans.length; save(); }
-  const pr = R.prompts[state.list[state.cur]];
-  const head = state.mode === "daily"
-    ? `<div class="dots">${state.list.map((_, i) => `<i class="dot${i === state.cur ? " cur" : ""}" style="${state.ans[i] ? "background:" + tierOf(state.ans[i].p).c : ""}"></i>`).join("")}</div>`
-    : `<div class="unl-head"><span>${state.ans.length} answered</span><b>${state.total || 0} pts</b></div>`;
-  $("game").innerHTML = `${head}
-  <div class="card">
-    <div class="timer"><i id="bar"></i></div>
-    <div class="prompt">${pr.t}</div>
-    <form class="entry" id="f" autocomplete="off"><input id="in" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="your answer" aria-label="Your answer" maxlength="40"><button class="go">Go</button></form>
-    <div class="under"><span class="msg" id="msg"></span><button class="skip" id="skip" type="button">Skip</button></div>
-    <div class="reveal" id="rev"></div>
-  </div>`;
-  $("f").onsubmit = e => { e.preventDefault(); submit($("in").value); };
-  $("skip").onclick = () => lock(null);
-  setTimeout(() => { const i = $("in"); if (i) i.focus({preventScroll: true}); }, 30);
-  startTimer();
-}
-function startTimer(){
-  stopTimer(); const t0 = performance.now(), bar = $("bar");
-  const step = () => {
-    if (!bar.isConnected) return;
-    const left = SECS - (performance.now() - t0) / 1000;
-    bar.style.transform = `scaleX(${Math.max(0, left / SECS)})`;
-    bar.classList.toggle("low", left < 6);
-    if (left <= 0){ lock(null, true); return; }
-    timer = requestAnimationFrame(step);
-  };
-  timer = requestAnimationFrame(step);
-}
-function stopTimer(){ if (timer) cancelAnimationFrame(timer); timer = null; }
-function submit(raw){
-  const pr = R.prompts[state.list[state.cur]], r = check(pr, raw), msg = $("msg"), inp = $("in");
-  if (!r.err && state.mode === "daily" && state.ans.some(a => a && a.a === r.a)) r.err = "Already used";
-  if (r.err){ msg.textContent = r.err; inp.classList.remove("shake"); void inp.offsetWidth; inp.classList.add("shake"); inp.select(); return; }
-  lock(r);
-}
-function lock(r, timeout){
-  stopTimer();
-  const pr = R.prompts[state.list[state.cur]], p = r ? r.p : 0, t = tierOf(p);
-  const res = {a: r ? r.a : null, p};
-  if (state.mode === "daily") state.ans[state.cur] = res; else { state.ans.push(res); state.total = (state.total || 0) + p; }
-  save();
-  const top = answers(pr).filter(x => x[0] !== res.a && x[1] > p).slice(0, 2);
-  $("f").style.display = "none"; document.querySelector(".under").style.display = "none"; document.querySelector(".timer").style.visibility = "hidden";
-  $("rev").innerHTML = `<div class="word">${res.a || (timeout ? "Time's up" : "Skipped")}</div>
-    <div class="pts" style="color:${t.c}" id="cnt">0</div><span class="tier" style="background:${t.c}">${t.name}</span>
-    <div class="note">${top.length ? "Rarer: " + top.map(x => `<b>${x[0]}</b>`).join(", ") : "Top tier 🏆"}</div>
-    <button class="next" id="next">${state.mode === "daily" && state.cur === 6 ? "See score" : "Next →"}</button>`;
-  $("rev").classList.add("on");
-  Common.countUp($("cnt"), p);
-  if (p === 100) Common.burst();
-  const dot = document.querySelectorAll(".dot")[state.cur]; if (dot) dot.style.background = t.c;
-  if (state.mode === "unl") document.querySelector(".unl-head").innerHTML = `<span>${state.ans.length} answered</span><b>${state.total} pts</b>`;
-  $("next").onclick = next; $("next").focus();
-}
-function next(){
-  if (state.mode === "unl"){ state.list.push(rand()); state.cur++; save(); return render(); }
-  if (state.cur < 6){ state.cur++; save(); return render(); }
-  state.done = true; save(); stats(); render();
-}
-function results(){
-  const s = total(), emoji = state.ans.map(a => tierOf(a ? a.p : 0).e).join("");
-  const rows = state.ans.map((a, i) => { const pr = R.prompts[state.list[i]], top = answers(pr)[0];
-    return `<div class="brow"><span class="q">${pr.t}</span><span class="mine" style="color:${tierOf(a.p).c}">${a.a || "—"} · ${a.p}</span><span class="top">Rarest: <b>${top ? top[0] : ""}</b></span></div>`; }).join("");
-  $("game").innerHTML = `<div class="card result">
-    <div class="big" id="cnt">0</div><div class="sub">of 700 · <b>${rankOf(s)}</b></div>
-    <div class="emoji">${emoji}</div>
-    <div class="btnrow"><button class="go" id="share">Share</button><button class="ghost" id="more">Keep playing</button></div>
-    <div class="count">Next in <b id="cd"></b></div>
-    <div class="best">${rows}</div></div>`;
-  Common.countUp($("cnt"), s); countdown($("cd"));
-  $("share").onclick = () => Common.share(`Rarely #${state.day + 1}: ${s}/700\n${emoji}\nsheihab.github.io/rarely`);
-  $("more").onclick = () => load("unl");
-  setupAds();
-}
-function stats(){
-  const st = store.get("r:stats", {played: 0, streak: 0, max: 0, best: 0, sum: 0, last: -2});
-  if (st.lastDay === state.day) return;
-  const s = total(); st.played++; st.sum += s; st.best = Math.max(st.best, s);
-  st.streak = st.last === state.day - 1 ? st.streak + 1 : 1; st.last = state.day; st.lastDay = state.day; st.max = Math.max(st.max, st.streak);
-  store.set("r:stats", st);
-}
-$("helpBtn").onclick = () => openModal(`<h2>How to play ${X}</h2><ul class="rules"><li>Answer each prompt. 25 seconds each.</li><li>Rarer answers score more.</li><li>7 new prompts daily. Unlimited never ends.</li></ul>
-  <div class="tiers">${TIERS.slice(0, 5).reverse().map(t => `<span class="chip" style="background:${t.c}">${t.p}</span>`).join("")}</div><button class="next" data-close>Play</button>`);
-$("statsBtn").onclick = () => { const st = store.get("r:stats", {played: 0, streak: 0, max: 0, best: 0});
-  openModal(`<h2>Stats ${X}</h2><div class="stats"><div><b>${st.played}</b><span>Played</span></div><div><b>${st.streak}</b><span>Streak</span></div><div><b>${st.max}</b><span>Best streak</span></div><div><b>${st.best}</b><span>Best</span></div></div>`); };
-$("mDaily").onclick = () => load("daily"); $("mUnl").onclick = () => load("unl");
-
-(async () => {
-  try{
-    const [r, w] = await Promise.all([fetch("data/rarely.json").then(x => x.json()), fetch("data/words.json").then(x => x.json())]);
-    R = r; W = {}; for (const p in w) for (const x of w[p].split(" ")) W[x] = +p;
-    load(new URLSearchParams(location.search).get("mode") === "unlimited" ? "unl" : "daily");
-    if (!store.get("r:seen", false)){ $("helpBtn").click(); store.set("r:seen", true); }
-    setupAds();
-  }catch(e){ $("game").innerHTML = `<div class="loading">Couldn't load. Refresh to try again.</div>`; console.error(e); }
-})();
-window.__rarely = { get R(){ return R }, get state(){ return state }, answers, check, stopTimer };
-}
-</script>
-</body>
-</html>
+<script>Common.setupAds();</script>
+</body></html>

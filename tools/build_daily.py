@@ -18,7 +18,7 @@ def tchips(items): return '<div class="w">' + "".join(f'<span style="text-transf
 made = []
 for d in range(last + 1):
     date = start + datetime.timedelta(days=d); nice = f"{date.day} {date.strftime('%B %Y')}"; path = f"answers/{date.isoformat()}.html"
-    body = f'<h1>Rarely #{d+1} answers ({nice})</h1><p class="lead">Spoilers! The rarest answers for every prompt, plus today\'s Squarely word at the bottom.</p><a class="cta" href="../">Not played yet? <b>Play first →</b></a>'
+    body = f'<h1>Rarely #{d+1} answers ({nice})</h1><p class="lead">Spoilers! The rarest answers for every prompt, plus today\'s Squarely word at the bottom.</p><a class="cta" href="../rarely.html">Not played yet? <b>Play first →</b></a>'
     faq = []
     for n, i in enumerate(R["days"][d], 1):
         pr = R["prompts"][i]; al = sorted(answers(pr), key=lambda x: (-x[1], x[0]))
@@ -39,7 +39,7 @@ for d, dt, p in reversed(made):
     w = S["answers"][d]
     body += f'<div class="pr"><h3>#{d+1} · {dt.day} {dt.strftime("%B %Y")}</h3>' + (f'<details><summary>Reveal</summary><b style="letter-spacing:.15em">{w.upper()}</b></details>' if d == last else f'<b style="letter-spacing:.15em">{w.upper()}</b>') + "</div>"
 write("squarely-answers.html", page("squarely-answers.html", "Squarely Answer Today + All Past Words", "Today's Squarely answer (hidden until you tap) and every past Squarely word.", body))
-urls = ["", "squarely.html", "how-to-play.html", "lists.html", "word-lists.html", "answers.html", "squarely-answers.html", "privacy.html"] + [p for _, _, p in made] \
+urls = ["", "rarely.html", "squarely.html", "quickly.html", "how-to-play.html", "lists.html", "word-lists.html", "answers.html", "squarely-answers.html", "privacy.html"] + [p for _, _, p in made] \
      + sorted("lists/" + os.path.basename(f) for f in glob.glob(os.path.join(ROOT, "lists/*.html"))) + sorted("words/" + os.path.basename(f) for f in glob.glob(os.path.join(ROOT, "words/*.html")))
 open(os.path.join(ROOT, "sitemap.xml"), "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{today.isoformat()}</lastmod></url>\n" for u in urls) + "</urlset>\n")
 open(os.path.join(ROOT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")

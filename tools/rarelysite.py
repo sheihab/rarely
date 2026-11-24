@@ -88,9 +88,9 @@ def page(path, title, desc, body, faq=None, extra_ld=None):
 <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}og-image.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{up}icon.svg" type="image/svg+xml"><meta name="theme-color" content="#14121F">
 <script type="application/ld+json">{json.dumps(ld)}</script><style>{CSS}</style></head><body>
-<div class="top"><a class="logo" href="{up}"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z" fill="#FFC23D"/></svg>Rarely</a><a class="play" href="{up}">Play</a></div>
+<div class="top"><a class="logo" href="{up}"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z" fill="#FFC23D"/></svg>Rarely</a><a class="play" href="{up}">Play free games</a></div>
 <main>{body}</main>
-<footer><a href="{up}">Rarely</a> · <a href="{up}squarely.html">Squarely</a> · <a href="{up}lists.html">Lists</a> · <a href="{up}word-lists.html">Word lists</a> · <a href="{up}answers.html">Answers</a> · <a href="{up}privacy.html">Privacy</a></footer></body></html>"""
+<footer><a href="{up}rarely.html">Rarely</a> · <a href="{up}squarely.html">Squarely</a> · <a href="{up}quickly.html">Quickly</a> · <a href="{up}lists.html">Lists</a> · <a href="{up}word-lists.html">Word lists</a> · <a href="{up}answers.html">Answers</a> · <a href="{up}privacy.html">Privacy</a></footer></body></html>"""
 
 def write(path, content):
     full = os.path.join(ROOT, path); os.makedirs(os.path.dirname(full) or ROOT, exist_ok=True)

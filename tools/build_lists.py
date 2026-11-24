@@ -10,7 +10,7 @@ for key, c in R["cats"].items():
     plural = c["slug"].replace("list-of-", "").replace("-", " ")
     items = sorted(c["a"].items(), key=lambda x: x[0])
     body = f'<h1>List of {esc(plural)}</h1><p class="lead">{len(items)} {esc(plural)}, from the ones everybody knows to the ones almost nobody thinks of. The badge is how many points each one scores in <b>Rarely</b>.</p>'
-    body += f'<a class="cta" href="../">🎯 "{esc(c["t"])}" is a real prompt in <b>Rarely</b>, the daily game where rare answers win. <b>Play today →</b></a>'
+    body += f'<a class="cta" href="../rarely.html">🎯 "{esc(c["t"])}" is a real prompt in <b>Rarely</b>, the daily game where rare answers win. <b>Play today →</b></a>'
     for p in (100, 85, 60, 30, 10):
         tier = [x for x in items if x[1] == p]
         if tier: body += f'<h2>{TN[p][0]} {esc(plural)} ({len(tier)})</h2>' + tchips(tier)
@@ -28,7 +28,8 @@ body = """<h1>How to play</h1>
 <h2>Rarely</h2><ol><li>7 prompts a day, like <i>Name a fruit</i>. 25 seconds each.</li><li>Type one answer. Rarer answers score more: 10, 30, 60, 85 or 100.</li><li>New prompts every midnight. Unlimited mode never ends.</li></ol>
 <p>Example: <b>Name a fruit</b>. <i>apple</i> 10 · <i>mango</i> 30 · <i>papaya</i> 60 · <i>kumquat</i> 85 · <i>carambola</i> 100.</p>
 <h2>Squarely</h2><ol><li>Guess the hidden 5-letter word in 6 tries.</li><li>Green: right letter, right spot. Gold: right letter, wrong spot.</li><li>New word every day. Unlimited gives you a fresh word straight away.</li></ol>
+<h2>Quickly</h2><ol><li>Unscramble the letters into a word. 60 seconds total.</li><li>10 points per letter. Skip if stuck.</li><li>Daily set for everyone, or unlimited.</li></ol>
 <a class="cta" href="./"><b>Play now →</b></a>"""
-write("how-to-play.html", page("how-to-play.html", "How to Play Rarely & Squarely", "How to play Rarely (rare answers win) and Squarely (guess the 5-letter word).", body,
+write("how-to-play.html", page("how-to-play.html", "How to Play Rarely, Squarely & Quickly", "How to play Rarely (rare answers win), Squarely (guess the 5-letter word) and Quickly (unscramble words in 60 seconds).", body,
       [("How does Rarely scoring work?", "Each answer scores 10, 30, 60, 85 or 100 points depending on how rare it is."), ("How do you play Squarely?", "Guess the hidden 5-letter word in 6 tries. Green means right spot, gold means wrong spot.")]))
 print("list pages:", len(hub))

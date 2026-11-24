@@ -17,7 +17,7 @@ for r in rules:
     bylen = collections.defaultdict(list)
     for w in ans: bylen[len(w)].append(w)
     body = f'<h1>{esc(title)}</h1><p class="lead">We found <b>{len(ans):,}</b> {esc(short)}. The number next to each word is its <b>Rarely score</b>: the rarer the word, the higher the score.</p>'
-    body += f'<a class="cta" href="../">🎯 Prompts like this appear in <b>Rarely</b>, the daily game where rare answers win. <b>Play →</b></a>'
+    body += f'<a class="cta" href="../rarely.html">🎯 Prompts like this appear in <b>Rarely</b>, the daily game where rare answers win. <b>Play →</b></a>'
     body += f'<h2>Rarest {esc(short)}</h2><p class="muted">Use these to impress in word games.</p>{chips(rare, W)}'
     body += f'<h2>Most common {esc(short)}</h2>{chips(common, W)}'
     body += f'<h2>All {esc(short)}, by length</h2>'

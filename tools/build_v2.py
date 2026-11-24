@@ -106,3 +106,10 @@ ans = sorted(set(ans) - NAMES); random.Random(424242).shuffle(ans)
 json.dump({"start": "2026-11-24", "answers": ans, "valid": " ".join(valid)}, open(os.path.join(ROOT, "data/squarely.json"), "w"), separators=(",", ":"))
 for f in ("rarely.json", "squarely.json"): print(f, os.path.getsize(os.path.join(ROOT, "data", f)) // 1024, "KB")
 print("squarely answers:", len(ans), "valid:", len(valid))
+
+# ---------------- Quickly: common 5-7 letter words to unscramble
+qk = [w for w in W if 5 <= len(w) <= 7 and w in classic and w not in capital_only and wordfreq.zipf_frequency(w, "en") >= 4.0
+      and not (w.endswith("s") and not w.endswith("ss")) and w not in NAMES and len(set(w)) >= 4]
+qk = sorted(set(qk)); random.Random(99).shuffle(qk)
+json.dump({"start": "2026-11-24", "words": qk}, open(os.path.join(ROOT, "data/quickly.json"), "w"), separators=(",", ":"))
+print("quickly words:", len(qk), os.path.getsize(os.path.join(ROOT, "data/quickly.json")) // 1024, "KB", qk[:20])

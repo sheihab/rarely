@@ -3,142 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Squarely: Free Daily 5-Letter Word Game + Unlimited</title>
-<meta name="description" content="Guess the hidden 5-letter word in 6 tries. Green = right spot, gold = wrong spot. A new word every day, plus unlimited play. Free, no sign-up.">
+<title>Squarely: Daily 5-Letter Word Game + Unlimited</title>
+<meta name="description" content="Guess the hidden 5-letter word in 6 tries. Green = right spot, gold = wrong spot. New word daily, plus unlimited play. Free.">
 <link rel="canonical" href="https://sheihab.github.io/rarely/squarely.html">
 <meta name="theme-color" content="#14121F">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
-<meta property="og:title" content="Squarely: daily 5-letter word game">
-<meta property="og:description" content="Guess the word in 6 tries. New word daily, plus unlimited.">
-<meta property="og:url" content="https://sheihab.github.io/rarely/squarely.html">
-<meta property="og:image" content="https://sheihab.github.io/rarely/og-squarely.png">
+<meta property="og:title" content="Squarely: Daily 5-Letter Word Game + Unlimited"><meta property="og:description" content="Guess the hidden 5-letter word in 6 tries. Green = right spot, gold = wrong spot. New word daily, plus unlimited play. Free.">
+<meta property="og:url" content="https://sheihab.github.io/rarely/squarely.html"><meta property="og:type" content="website">
+<meta property="og:image" content="https://sheihab.github.io/rarely/og-squarely.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Squarely","url":"https://sheihab.github.io/rarely/squarely.html","applicationCategory":"GameApplication","genre":"Word game","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"}}
-</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Squarely", "url": "https://sheihab.github.io/rarely/squarely.html", "applicationCategory": "GameApplication", "genre": "Word game", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "description": "Guess the hidden 5-letter word in 6 tries. Green = right spot, gold = wrong spot. New word daily, plus unlimited play. Free."}</script>
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<header>
-  <div class="bar">
-    <button class="icon-btn" id="helpBtn" aria-label="How to play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.3M12 17h.01"/></svg></button>
-    <nav class="games"><a href="./">Rarely</a><a href="squarely.html" class="on">Squarely</a></nav>
-    <button class="icon-btn" id="statsBtn" aria-label="Stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V11M12 20V4M19 20v-6"/></svg></button>
-  </div>
-</header>
-<main class="wrap">
-  <div class="mode"><button class="on" id="mDaily">Daily</button><button id="mUnl">Unlimited</button></div>
-  <div class="grid" id="grid"></div>
-  <div id="end"></div>
-  <div class="kb" id="kb"></div>
-  <div class="ad-slot" data-slot="sq"></div>
-</main>
-<footer><a href="squarely-answers.html">Past answers</a> · <a href="word-lists.html">Word lists</a> · <a href="privacy.html">Privacy</a></footer>
+<header><div class="bar">
+<a class="icon-btn" href="./" aria-label="All games"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg></a>
+<nav class="games"><a href="rarely.html">Rarely</a><a href="squarely.html" class="on">Squarely</a><a href="quickly.html">Quickly</a></nav><button class="icon-btn" id="statsBtn" aria-label="Stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V11M12 20V4M19 20v-6"/></svg></button></div></header>
+<main class="wrap"><div id="game"><div class="loading">Loading…</div></div><div class="ad-slot" data-slot="game"></div></main>
+<footer><a href="./">All games</a> · <a href="how-to-play.html">How to play</a> · <a href="answers.html">Answers</a> · <a href="lists.html">Lists</a> · <a href="word-lists.html">Word lists</a> · <a href="privacy.html">Privacy</a></footer>
 <div class="modal-bg" id="modal" role="dialog" aria-modal="true"><div class="modal" id="modalBody"></div></div>
 <div class="toast" id="toast"></div>
 <script src="common.js"></script>
-<script>
-{
-const { $, store, toast, openModal, X, dayIndex, countdown, setupAds } = Common;
-let S, VALID, st, busy = false;
-const ROWS = [["q","w","e","r","t","y","u","i","o","p"],["a","s","d","f","g","h","j","k","l"],["enter","z","x","c","v","b","n","m","back"]];
-
-function score(guess, ans){
-  const res = Array(5).fill("miss"), left = {};
-  for (let i = 0; i < 5; i++){ if (guess[i] === ans[i]) res[i] = "hit"; else left[ans[i]] = (left[ans[i]] || 0) + 1; }
-  for (let i = 0; i < 5; i++) if (res[i] !== "hit" && left[guess[i]]){ res[i] = "near"; left[guess[i]]--; }
-  return res;
-}
-const key = () => st.mode === "daily" ? "s:day:" + st.day : "s:unl";
-function save(){ store.set(key(), st); }
-function load(mode){
-  if (mode === "daily"){ const d = dayIndex(S.start, S.answers.length); st = store.get("s:day:" + d, null) || {mode, day: d, ans: S.answers[d], guesses: [], cur: "", over: false}; }
-  else { st = store.get("s:unl", null); if (!st || st.over) st = newUnl(); }
-  $("mDaily").classList.toggle("on", mode === "daily"); $("mUnl").classList.toggle("on", mode !== "daily");
-  draw();
-}
-function newUnl(){ const prev = store.get("s:unlwins", {n: 0}); return {mode: "unl", ans: S.answers[Math.floor(Math.random() * S.answers.length)], guesses: [], cur: "", over: false, streak: prev.n}; }
-function draw(){
-  let g = "";
-  for (let r = 0; r < 6; r++){
-    const word = st.guesses[r] || (r === st.guesses.length ? st.cur : ""), res = st.guesses[r] ? score(st.guesses[r], st.ans) : null;
-    g += `<div class="row" id="r${r}">` + [0,1,2,3,4].map(i => `<div class="tile ${res ? res[i] : word[i] ? "filled" : ""}" style="${res ? `animation-delay:${i * 90}ms` : ""}">${word[i] || ""}</div>`).join("") + "</div>";
-  }
-  $("grid").innerHTML = g;
-  const kstate = {};
-  st.guesses.forEach(w => score(w, st.ans).forEach((r, i) => { const c = w[i], rank = {hit: 3, near: 2, miss: 1}; if (!kstate[c] || rank[r] > rank[kstate[c]]) kstate[c] = r; }));
-  $("kb").innerHTML = ROWS.map(row => `<div class="krow">${row.map(k => `<button data-k="${k}" class="${k.length > 1 ? "wide" : ""} ${kstate[k] || ""}" aria-label="${k}">${k === "back" ? "⌫" : k}</button>`).join("")}</div>`).join("");
-  $("end").innerHTML = st.over ? endHtml() : "";
-  $("kb").style.display = st.over ? "none" : "";
-  if (st.over) wireEnd();
-}
-function endHtml(){
-  const won = st.guesses[st.guesses.length - 1] === st.ans;
-  return `<div class="sq-end"><div class="ans">${st.ans}</div><div style="color:var(--muted);margin:2px 0 10px">${won ? ["Genius","Brilliant","Great","Nice","Solid","Phew"][st.guesses.length - 1] : "Next time"}</div>
-    <div class="btnrow">${st.mode === "daily" ? `<button class="go" id="shareB">Share</button><button class="ghost" id="playUnl">Keep playing</button>` : `<button class="go" id="nextB">Next word →</button><button class="ghost" id="shareB">Share</button>`}</div>
-    ${st.mode === "daily" ? `<div class="count">Next in <b id="cd"></b></div>` : ""}</div>`;
-}
-function wireEnd(){
-  const grid = st.guesses.map(w => score(w, st.ans).map(r => ({hit: "🟩", near: "🟨", miss: "⬛"})[r]).join("")).join("\n");
-  const won = st.guesses[st.guesses.length - 1] === st.ans, tag = st.mode === "daily" ? `Squarely #${st.day + 1}` : "Squarely";
-  $("shareB").onclick = () => Common.share(`${tag} ${won ? st.guesses.length : "X"}/6\n${grid}\nsheihab.github.io/rarely/squarely.html`);
-  if ($("playUnl")) $("playUnl").onclick = () => load("unl");
-  if ($("nextB")) $("nextB").onclick = () => { st = newUnl(); save(); draw(); };
-  countdown($("cd")); setupAds();
-}
-function press(k){
-  if (st.over || busy) return;
-  if (k === "back"){ st.cur = st.cur.slice(0, -1); return drawRow(); }
-  if (k === "enter") return submit();
-  if (/^[a-z]$/.test(k) && st.cur.length < 5){ st.cur += k; drawRow(); }
-}
-function drawRow(){
-  const row = $("r" + st.guesses.length); if (!row) return;
-  [...row.children].forEach((t, i) => { t.textContent = st.cur[i] || ""; t.className = "tile" + (st.cur[i] ? " filled" : ""); });
-}
-function submit(){
-  const row = $("r" + st.guesses.length);
-  const bad = m => { toast(m); row.classList.remove("shake"); void row.offsetWidth; row.classList.add("shake"); };
-  if (st.cur.length < 5) return bad("5 letters");
-  if (!VALID.has(st.cur)) return bad("Not in word list");
-  st.guesses.push(st.cur); st.cur = "";
-  const won = st.guesses[st.guesses.length - 1] === st.ans;
-  if (won || st.guesses.length === 6){ st.over = true; record(won); }
-  save(); busy = true; draw();
-  setTimeout(() => { busy = false; if (won) Common.burst(); }, 600);
-}
-function record(won){
-  if (st.mode === "unl"){ store.set("s:unlwins", {n: won ? (st.streak || 0) + 1 : 0}); return; }
-  const s = store.get("s:stats", {played: 0, wins: 0, streak: 0, max: 0, last: -2, dist: [0,0,0,0,0,0]});
-  if (s.lastDay === st.day) return;
-  s.played++; s.lastDay = st.day;
-  if (won){ s.wins++; s.dist[st.guesses.length - 1]++; s.streak = s.last === st.day - 1 ? s.streak + 1 : 1; s.last = st.day; s.max = Math.max(s.max, s.streak); }
-  else s.streak = 0;
-  store.set("s:stats", s);
-}
-document.addEventListener("keydown", e => {
-  if (e.ctrlKey || e.metaKey || e.altKey || document.querySelector(".modal-bg.on")) return;
-  const k = e.key === "Enter" ? "enter" : e.key === "Backspace" ? "back" : e.key.toLowerCase();
-  if (k === "enter" || k === "back" || /^[a-z]$/.test(k)){ e.preventDefault(); press(k); }
-});
-$("kb").addEventListener("click", e => { const b = e.target.closest("[data-k]"); if (b) press(b.dataset.k); });
-$("mDaily").onclick = () => load("daily"); $("mUnl").onclick = () => load("unl");
-const demo = (w, r) => `<div class="row" style="width:220px;margin:6px 0">${[...w].map((c, i) => `<div class="tile ${r[i] || ""}" style="animation:none">${c}</div>`).join("")}</div>`;
-$("helpBtn").onclick = () => openModal(`<h2>How to play ${X}</h2><ul class="rules"><li>Guess the word in 6 tries.</li></ul>${demo("chest", ["hit"])}<p style="color:var(--muted);margin:0 0 6px;font-size:14px">Green: right spot. Gold: wrong spot.</p>${demo("plane", ["", "", "near"])}<button class="next" data-close style="margin-top:12px">Play</button>`);
-$("statsBtn").onclick = () => { const s = store.get("s:stats", {played: 0, wins: 0, streak: 0, max: 0, dist: [0,0,0,0,0,0]}), mx = Math.max(1, ...s.dist);
-  openModal(`<h2>Stats ${X}</h2><div class="stats"><div><b>${s.played}</b><span>Played</span></div><div><b>${s.played ? Math.round(100 * s.wins / s.played) : 0}</b><span>Win %</span></div><div><b>${s.streak}</b><span>Streak</span></div><div><b>${s.max}</b><span>Best</span></div></div>
-  ${s.dist.map((n, i) => `<div style="display:flex;gap:8px;align-items:center;margin:4px 0;font-size:14px"><span style="width:12px">${i + 1}</span><span style="background:var(--sq-hit);padding:2px 8px;border-radius:6px;min-width:24px;width:${Math.max(8, 100 * n / mx)}%;text-align:right;font-weight:700">${n}</span></div>`).join("")}`); };
-(async () => {
-  S = await fetch("data/squarely.json").then(r => r.json());
-  VALID = new Set(S.valid.split(" ")); S.answers.forEach(a => VALID.add(a));
-  load(new URLSearchParams(location.search).get("mode") === "unlimited" ? "unl" : "daily");
-  if (!store.get("s:seen", false)){ $("helpBtn").click(); store.set("s:seen", true); }
-  setupAds();
-})();
-window.__sq = { get st(){ return st } };
-}
-</script>
-</body>
-</html>
+<script src="js/squarely.js"></script>
+</body></html>
